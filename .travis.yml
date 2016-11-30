@@ -1,10 +1,5 @@
-language: ruby
-rvm:
-  - 2.1
-install: 
-  - bundle install
+language: generic
+services: docker
 script:
-  - bundle exec jekyll build
-branches:
-  only:
-    - gh-pages
+  - touch .gitignore
+  - docker run --volume=$(pwd):/app --workdir=/app coala/base:0.8 /bin/bash -c "pip3 install 'git+https://github.com/jayvdb/coala-quickstart@gh_39'; coala-quickstart --ci; coala-ci"
